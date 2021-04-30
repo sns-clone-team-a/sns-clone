@@ -14,6 +14,7 @@
         <p><img src="{{ object.sns_image.url }}" width=300></p>
         <a href="{% url 'good' object.pk %}" class="btn btn-primary active" role="button" aria-pressed="true">いいねする</a>
         <a href="{% url 'read' object.pk %}" class="btn btn-secondary  active" role="button" aria-pressed="true">既読にする</a>
+        <a href="{% url 'follow' object.pk %}" class="btn btn-primary active" role="button" aria-pressed="true">follow</a>
     </div>
 </div>
 {% endblock content %}

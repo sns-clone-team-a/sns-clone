@@ -2,15 +2,13 @@
 
 {% block header %}
 <div class="alert alert-primary" role="alert">
-    <h3>社内SNS</h3>
-    <p>フォロー中:{{following.follow}}</p>
-    <p>フォロワー:{{following.befollowed}}</p>
+    <h3>followpage</h3>
 </div>
 {% endblock header %}
 
 {% block content %}
 <div class="container">
-    {% for item in object_list %}
+    {% for item in follow_list %}
     <div class="alert alert-success" role="alert">
         <p>タイトル: <a href="{% url 'detail' item.pk %}">{{ item.title }}</a></p>
         <p>投稿者: {{ item.author }}</p>
