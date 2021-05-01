@@ -2,22 +2,29 @@
 
 {% block header %}
 <div class="alert alert-primary" role="alert">
-    <h3>社内SNS</h3>
-    <p>フォロー中:{{following.follow}}</p>
-    <p>フォロワー:{{following.befollowed}}</p>
+    <h3>SNS</h3>
 </div>
 {% endblock header %}
 
 {% block content %}
+<a href="{% url 'profile' %}">my profile</a>
+<a href="{% url 'create' %}">create</a>
+{% if user.is_authenticated %}
 <div class="container">
     {% for item in object_list %}
     <div class="alert alert-success" role="alert">
-        <p>タイトル: <a href="{% url 'detail' item.pk %}">{{ item.title }}</a></p>
-        <p>投稿者: {{ item.author }}</p>
-        <button type="button" class="btn btn-primary" disabled>いいね{{ item.good }}</button>
-        <button type="button" class="btn btn-secondary " disabled>既読{{ item.read }}</button>
+        <p>タイトル：<a href="{% url 'detail' item.pk %}">{{ item.title }}</a></p>
+        <p>投稿者：{{ item.author }}</p>
+        <a href="{% url 'good' item.pk %}" class="btn btn-primary "  tabindex="-1" role="button" aria-disabled="true">いいね{{item.good}}</a>
+        {% if item.author  == user.username %}
+           <a href="{% url 'delete' item.pk %}" class="btn btn-primary "  tabindex="-1" role="button" aria-disabled="true">削除</a>
+           <a href="{% url 'update' item.pk %}" class="btn btn-primary "  tabindex="-1" role="button" aria-disabled="true">編集</a>
+        {% endif %}
     </div>
     {% endfor %}
-    <a href="{% url 'logout' %}" class="btn btn-primary active" role="button" aria-pressed="true">logout</a>
+    <a href="{% url 'logout' %}" >logout</a>
 </div>
+{% else %}
+please login <a href="{% url 'login' %}" >login</a>
+{% endif %}
 {% endblock content %}
