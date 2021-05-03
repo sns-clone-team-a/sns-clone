@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import BoardModel, FollowModel
+from .models import BoardModel, ProfileModel
 
 # Register your models here.
 
 admin.site.register(BoardModel)
-admin.site.register(FollowModel)
+admin.site.register(ProfileModel)

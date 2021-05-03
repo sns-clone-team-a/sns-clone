@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block customcss %}
+<link href="{% static 'image.css' %}" rel="stylesheet">
+{% endblock customcss %}
 
 {% block header %}
 <div class="alert alert-primary" role="alert">
@@ -7,15 +12,17 @@
 {% endblock header %}
 
 {% block content %}
-<a href="{% url 'profile' %}">my profile</a>
-<a href="{% url 'create' %}">create</a>
+{% comment %} <a href="{% url 'profile' user.id %}">my profile</a> {% endcomment %}
+<a href="{% url 'create' %}" class="btn btn-primary "  tabindex="-1" role="button" aria-disabled="true">create</a>
 {% if user.is_authenticated %}
 <div class="container">
     {% for item in object_list %}
     <div class="alert alert-success" role="alert">
+        <img src="{{object_profile.header_image.url}}" class="user-icon" >
         <p>タイトル：<a href="{% url 'detail' item.pk %}">{{ item.title }}</a></p>
         <p>投稿者：{{ item.author }}</p>
         <a href="{% url 'good' item.pk %}" class="btn btn-primary "  tabindex="-1" role="button" aria-disabled="true">いいね{{item.good}}</a>
+        <a href="{% url 'profile' item.pk %}" class="btn btn-primary active" role="button" aria-pressed="true">投稿者のProfileへ</a>
         {% if item.author  == user.username %}
            <a href="{% url 'delete' item.pk %}" class="btn btn-primary "  tabindex="-1" role="button" aria-disabled="true">削除</a>
            <a href="{% url 'update' item.pk %}" class="btn btn-primary "  tabindex="-1" role="button" aria-disabled="true">編集</a>

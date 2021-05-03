@@ -9,10 +9,12 @@
 {% block content %}
 <div class="container">
     <div class="alert alert-success" role="alert">
-        <p>タイトル: {{ object.title }}</p>
         <p>投稿者: {{ object.author }}</p>
+        <p>タイトル: {{ object.title }}</p>
+        <p> {{ object.content }}</p>
         <p><img src="{{ object.sns_image.url }}" width=300></p>
         <a href="{% url 'good' object.pk %}" class="btn btn-primary active" role="button" aria-pressed="true">いいねする</a>
+        <a href="{% url 'follow' object.pk %}" class="btn btn-primary active" role="button" aria-pressed="true">follow</a>
     </div>
 </div>
 {% endblock content %}
