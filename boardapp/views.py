@@ -116,5 +116,9 @@ def followfunc(request, user_id):
 
 def followpagefunc(request, user_id):#フォローページ押すとエラーでる
 	user = ProfileModel.objects.get(user_id=user_id)
-	follow_list = user.follow_text.split()
+	follow_list = []
+	for b in BoardModel.objects.all():
+		for f in user.follow_text.split():
+			if str(b.user_id) == f:
+				follow_list.append(b)
 	return render(request, 'followpage.html', {'follow_list':follow_list})
