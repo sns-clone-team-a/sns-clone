@@ -42,3 +42,11 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.user-icon {
+  height: 80px;
+  width: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1.5px solid #eee;
+}
