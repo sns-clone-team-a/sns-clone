@@ -86,11 +86,15 @@ class ProfileCreate(CreateView):
 
 def profilefunc(request, user_id):
 	object_profile = ProfileModel.objects.get(user_id=user_id)
+	user = request.user
 	object_board = []
+	following = False
+	if str(user.id) in object_profile.befollowed_text.split():
+		following = True
 	for b in BoardModel.objects.all():
 		if user_id == b.user_id:
 			object_board.append(b)
-	return render(request, 'profile.html', {'object_board':object_board, 'object_profile':object_profile})
+	return render(request, 'profile.html', {'object_board':object_board, 'object_profile':object_profile, 'following':following})
 	
 
 class BoardDelete(DeleteView):
@@ -118,7 +122,7 @@ def followfunc(request, user_id):
 	befollowed.befollowed_text += ' ' + str(follow.user_id)
 	befollowed.save()
 
-	return redirect('list')
+	return redirect('profile', user_id=user_id)
 
 def followpagefunc(request, user_id):
 	user = ProfileModel.objects.get(user_id=user_id)

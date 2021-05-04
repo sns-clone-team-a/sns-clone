@@ -13,6 +13,9 @@ class BoardModel(models.Model):
     readtext = models.TextField(null=True, blank=True, default='initial')
     pub_date = models.DateTimeField(default=timezone.now)
 
+    def __str__(self):
+        return self.title
+
 class ProfileModel(models.Model):
     user_id = models.IntegerField(null=True, blank=True, default=0)
     author = models.CharField(max_length=50)
@@ -22,3 +25,6 @@ class ProfileModel(models.Model):
     follow_text = models.TextField(null=True, blank=True, default='initial')
     befollowed_number = models.IntegerField(null=True, blank=True, default=0)
     befollowed_text = models.TextField(null=True, blank=True, default='initial')
+
+    def __str__(self):
+        return self.author

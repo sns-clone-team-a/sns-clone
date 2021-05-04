@@ -13,7 +13,8 @@
     <p>フォロー中:{{object_profile.follow_number}}</p>
     <p>フォロワー:{{object_profile.befollowed_number}}</p>
     <div class="text-right">
-        {% if user.id in object_profile.befollowed.text %}
+        {% if user.id == object_profile.user_id %}
+        {% elif following %}
         <button type="button" class="btn btn-primary" disabled>Following</button>
         {% else %}
         <a href="{% url 'follow' object_profile.user_id %}" class="btn btn-primary active" role="button" aria-pressed="true">Follow</a>
