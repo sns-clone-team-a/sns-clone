@@ -2,7 +2,7 @@
 
 {% block header %}
 <div class="alert alert-primary" role="alert">
-    <h3>Detail page</h3>
+    <h3>SNS</h3>
 </div>
 {% endblock header %}
 
@@ -18,7 +18,7 @@
     <div class="alert alert-success" role="alert">
         <p>投稿者: {{ object.author }}</p>
         <p>タイトル: {{ object.title }}</p>
-        <p>{{ object.pub_date }}</p>
+        <p>{{ object.pub_date|date:"Y-m-j H:i:s" }}</p>
         <p> {{ object.content }}</p>
         <p><img src="{{ object.sns_image.url }}" width=300></p>
         <a href="{% url 'good' object.pk %}" class="btn btn-primary active" role="button" aria-pressed="true">いいねする</a>

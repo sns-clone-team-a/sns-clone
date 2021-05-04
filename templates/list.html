@@ -30,7 +30,11 @@
     </form>
     {% for item in object_list %}
     <div class="alert alert-success" role="alert">
-        <img src="{{object_profile.header_image.url}}" class="user-icon" >
+        {% for i in object_profile %}
+        {% if item.user_id == i.user_id %}
+        <img src="{{i.header_image.url}}" class="user-icon" >
+        {% endif %}
+        {% endfor %}
         <p>タイトル：<a href="{% url 'detail' item.pk %}">{{ item.title }}</a></p>
         <p>投稿者：{{ item.author }}</p>
         <p>{{ item.pub_date|date:"Y-m-j H:i:s" }}</p>

@@ -4,7 +4,7 @@
 {% block content %}
 <form method="POST" enctype="multipart/form-data">{% csrf_token %}
     <p>ひとこと<input type="text" name="one_thing"></p>
-    <p>ヘッダー画像<input type="file" name="header_image"></p>
+    <p>アイコン画像<input type="file" name="header_image"></p>
     <input type="hidden" name='user_id' value="{{user.id}}">
     <input type="hidden" name='author' value="{{user.username}}">
     <input type="hidden" name='follow_number' value={{0}}>
