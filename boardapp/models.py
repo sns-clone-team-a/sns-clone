@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -10,6 +11,7 @@ class BoardModel(models.Model):
     sns_image = models.ImageField(upload_to='',null=True, blank=True, default=0)
     good = models.IntegerField(null=True, blank=True, default=0)
     readtext = models.TextField(null=True, blank=True, default='initial')
+    pub_date = models.DateTimeField(default=timezone.now)
 
 class ProfileModel(models.Model):
     user_id = models.IntegerField(null=True, blank=True, default=0)

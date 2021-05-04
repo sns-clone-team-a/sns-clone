@@ -6,6 +6,8 @@ from .models import BoardModel, ProfileModel
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
+from django.db.models import Q
+from django.contrib import messages
 
 
 
@@ -43,6 +45,10 @@ def listfunc(request):
 	object_list = BoardModel.objects.all()
 	object_profile = ProfileModel.objects.all()
 	user = request.user
+	keyword = request.GET.get('keyword')
+	if keyword:
+		object_list = object_list.filter(Q(title__icontains=keyword) | Q(content__icontains=keyword) |Q(author__icontains=keyword))
+		messages.success(request, ' 「{}」の検索結果'.format(keyword))
 	return render(request, 'list.html', {'object_list':object_list,'object_profile':object_profile, 'user':user})
 
 def logoutfunc(request):
@@ -114,7 +120,7 @@ def followfunc(request, user_id):
 
 	return redirect('list')
 
-def followpagefunc(request, user_id):#フォローページ押すとエラーでる
+def followpagefunc(request, user_id):
 	user = ProfileModel.objects.get(user_id=user_id)
 	follow_list = []
 	for b in BoardModel.objects.all():

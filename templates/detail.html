@@ -8,9 +8,17 @@
 
 {% block content %}
 <div class="container">
+    <form method="GET" action="{% url 'list' %}">
+        <input type="text" name="keyword">
+        <button type="submit">検索</button>
+        <a href="{% url 'list' %}" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">ホームへ</a>
+        <a href="{% url 'profile' user.id  %}" class="btn btn-primary"  tabindex="-1" role="button" aria-disabled="true">My profile</a>
+        <a href="{% url 'create' %}" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">create</a>
+    </form>
     <div class="alert alert-success" role="alert">
         <p>投稿者: {{ object.author }}</p>
         <p>タイトル: {{ object.title }}</p>
+        <p>{{ object.pub_date }}</p>
         <p> {{ object.content }}</p>
         <p><img src="{{ object.sns_image.url }}" width=300></p>
         <a href="{% url 'good' object.pk %}" class="btn btn-primary active" role="button" aria-pressed="true">いいねする</a>
