@@ -37,8 +37,7 @@
         <p>タイトル: <a href="{% url 'detail' item.pk %}">{{ item.title }}</a></p>
         <p>投稿者: {{ item.author }}</p>
         <p>{{ item.pub_date|date:"Y-m-j H:i:s" }}</p>
-        <button type="button" class="btn btn-primary" disabled>いいね{{ item.good }}</button>
-        <button type="button" class="btn btn-secondary " disabled>既読{{ item.read }}</button>
+        <a href="{% url 'good' item.pk %}" class="btn btn-primary "  tabindex="-1" role="button" aria-disabled="true">いいね{{item.good}}</a>
         {% if item.author  == user.username %}
            <a href="{% url 'delete' item.pk %}" class="btn btn-primary "  tabindex="-1" role="button" aria-disabled="true">削除</a>
            <a href="{% url 'update' item.pk %}" class="btn btn-primary "  tabindex="-1" role="button" aria-disabled="true">編集</a>
