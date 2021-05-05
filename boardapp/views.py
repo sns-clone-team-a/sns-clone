@@ -118,7 +118,7 @@ def followfunc(request, user_id):
 	befollowed.befollowed_text += ' ' + str(follow.user_id)
 	befollowed.save()
 
-	return redirect('list')
+	return ('list')
 
 def followpagefunc(request, user_id):
 	user = ProfileModel.objects.get(user_id=user_id)
